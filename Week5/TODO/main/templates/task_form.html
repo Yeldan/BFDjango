@@ -1,0 +1,16 @@
+{% extends 'main/index.html' %}
+
+{% block body %}
+
+<div>
+    <form class="form-horizontal" method="post">
+        {% csrf_token %}
+        {% include 'main/form-template.html' %}
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-success"> Submit </button>
+            </div>
+        </div>
+
+    </form>
+</div> 
