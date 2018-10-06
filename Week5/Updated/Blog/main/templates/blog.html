@@ -1,0 +1,25 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block body %}
+
+{% for post in posts %}
+
+<div class="leftcolumn">
+    <div class="card">
+        <h2> {{post.title}} </h2>
+        <h5> By: {{post.author}}, {{post.date_published}} </h5>
+        <div class="fakeimg" style="height:200px;"> Fake Image </div>
+        <p> {{post.content}} </p>
+    </div>
+</div>
+<div class="leftcolumn">
+    <div class="card">
+        <h2> Comments: </h2>
+        <p> {{post.comment}} </p>
+    </div>
+</div>    
+
+{% endfor %}
+
+{% endblock %}
