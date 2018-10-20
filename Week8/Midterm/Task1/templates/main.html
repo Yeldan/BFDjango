@@ -1,0 +1,20 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block body %}
+
+{% for restaurant in restaurants %}
+
+<div class="container">
+    <div class="card">
+        <h1> {{restaurant.name}} </h2>
+        <h3> {{restaurant.number}} </h3>
+        <h3> {{restaurant.telephone}} </h3> 
+        <h3> {{restaurant.city}} </h3> 
+        <h3> {{restaurant.user}} </h3>  
+    </div> 
+</div>
+
+{% endfor %}
+
+{% endblock %}
