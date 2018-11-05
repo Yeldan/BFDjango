@@ -1,0 +1,43 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block body %}
+
+<h1> Completed tasks in List 1 </h1>
+<table class="table">
+
+    <tr>
+        <th scope="col"> Task </th>
+        <th scope="col"> Created </th>
+        <th scope="col"> Due on </th>
+        <th scope="col"> Owner </th>
+        <th scope="col"> Mark </th>
+    </tr>
+
+    {% for task in tasks %}
+    <tr>
+        <th><a href=""> {{task.name}} </a></th>
+        <th> {{task.created}} </th>
+        <th> {{task.due_on}} </th>
+        <th> {{task.owner}} </th>
+        {% if task.mark is True %}
+            <th><button type="button" class="btn btn-info"> Done </button></th>
+        {% else %}
+			<th><button type="button" class="btn btn-info"> Not done </button></th>
+        {% endif %}
+        {% if user.is_authenticated %}
+        <th><a href="update/{{task.id}}"><button type="button" class="btn btn-info"> Update  </button></a></th>
+        {% endif %}
+        {% if user.is_authenticated %}
+        <th><a href="delete/{{task.id}}"><button type="button" class="btn btn-danger"> Delete this task </button></a></th>
+        {% endif %}
+    </tr>
+
+    {% endfor %}
+</table>
+
+{% if user.is_authenticated %}
+<a href="/current"><button type="button" class="btn btn-warning"> View incompleted tasks </button></a>
+{% endif %}
+
+{% endblock %}
