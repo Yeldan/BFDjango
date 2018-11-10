@@ -14,8 +14,8 @@ from django.contrib.auth.models import User
 
 class TaskView(APIView):
     def get(self, request):
-        posts = Task.objects.all()
-        serializer = TaskModelSerializer(posts, many=True)
+        tasks = Task.objects.all()
+        serializer = TaskModelSerializer(tasks, many=True)
         return Response(serializer.data)
 
     def post(self, request):
@@ -33,21 +33,21 @@ class TaskDetailView(APIView):
             return Http404
 
     def get(self, request, pk):
-        post = Task.objects.get(id=pk)
-        serializer = TaskModelSerializer(post)
+        task = Task.objects.get(id=pk)
+        serializer = TaskModelSerializer(task)
         return Response(serializer.data)
 
     def put(self, request, pk):
-        post = Task.objects.get(id=pk)
-        serializer = TaskModelSerializer(instance=post, data=request.data)
+        task = Task.objects.get(id=pk)
+        serializer = TaskModelSerializer(instance=task, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
         return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk):
-        post = Task.objects.get(id=pk)
-        post.delete()
+        task = Task.objects.get(id=pk)
+        task.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 class TaskGenView(generics.ListCreateAPIView):
@@ -89,5 +89,5 @@ def register(request):
         )
         return Response(serialized.data, status=status.HTTP_201_CREATED)
     else:
-        return Response(serialized._errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response(serialized.errors, status=status.HTTP_400_BAD_REQUEST)
 
